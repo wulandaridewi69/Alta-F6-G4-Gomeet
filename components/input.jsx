@@ -6,7 +6,13 @@ const Input = (props) => {
     return (
         <div className='flex flex-col gap-1'>
             {/* <TextField /> */}
-            <TextField id="email" type="email" value="abc" label="Email" variant="outlined" onChange={(e) => props.handleEmail(e)} onKeyDown={(e) => props.callSubmit(e)} />
+            <TextField
+                id={props.id}
+                type={props.type}
+                value={props.value}
+                label={props.label}
+                onChange={props.onChange}
+            />
         </div>
 
     )
