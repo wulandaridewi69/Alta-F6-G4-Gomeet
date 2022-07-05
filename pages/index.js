@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 // import Link from "next/link";
 import { CardEvenList } from '../components/cards';
 import Poster from '../assets/poster.png'
+import Input from '../components/input';
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       </Head>
       <main>
         <CardEvenList/>
+        <Input/>
         <h1>
           Hello World
         </h1>
