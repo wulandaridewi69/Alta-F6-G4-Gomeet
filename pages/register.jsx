@@ -46,7 +46,7 @@ const Register = () => {
       headers: headers,
     };
 
-    const url = "http://event.dwp.my.id/users";
+    const url = "https://altaproject.online/users";
     fetch(url, requestOptions)
       .then((response) => {
         const { data } = response;
