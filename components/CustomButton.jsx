@@ -1,6 +1,6 @@
 import React from "react";
 
-function CustomButton({ id, label, loading, onClick }) {
+function CustomButton({ id, label, className, loading, onClick }) {
     return (
         <button
             id={id}
