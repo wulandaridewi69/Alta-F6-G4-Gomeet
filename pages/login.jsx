@@ -45,8 +45,8 @@ const Login = () => {
                 const { data } = response;
                 response.json();
                 if (response.status == 200) {
-                    alert("Registrasion Success");
-                    router.push("/login");
+                    alert("Login Success");
+                    router.push("/");
                 }
             })
             .catch((err) => {
@@ -62,13 +62,25 @@ const Login = () => {
                     GOMEET
                 </h1>
                 <div className="text-white text-4xl font-bold">Login</div>
-                <form onSubmit={(e) => handleSubmit(e)} className="space-y-4 text-white flex flex-col">
-                    <Input className='bg-white/30 w-1/2' type="email" label="Email" onChange={(e) => setEmail(e.target.value)} />
-                    <Input className='bg-white/30 w-1/2' type="password" label="Password" onChange={(e) => setPassword(e.target.value)} />
+                <form onSubmit={(e) => handleSubmit(e)} className="space-y-4 text-white flex flex-col w-1/2">
+                    <Input
+                        className='bg-white/30 w-full'
+                        type="email"
+                        label="Email"
+                        onChange={(e) => setEmail(e.target.value)} />
+                    <Input
+                        className='bg-white/30 w-full'
+                        type="password"
+                        label="Password"
+                        onChange={(e) => setPassword(e.target.value)} />
                     <div className="flex justify-center">
-                        <Link href={"/"}>
-                            <CustomButton className={`bg-[#E49318] text-white font-bold py-2 w-24 rounded-lg ${loading && "bg-orange-200 cursor-not-allowed"
-                                }`} id="btn-login" label="Login" loading={loading || disabled} />
+                        <Link href={""}>
+                            <CustomButton
+                                className={`bg-[#E49318] text-white font-bold py-2 w-24 rounded-lg ${loading && "bg-orange-200 cursor-not-allowed"
+                                    }`}
+                                id="btn-login"
+                                label="Login"
+                                loading={loading || disabled} />
                         </Link>
                     </div>
                     <h1 className="flex justify-center">or</h1>
