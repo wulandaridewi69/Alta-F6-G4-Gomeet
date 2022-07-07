@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
 import CustomButton from "../components/CustomButton";
+import { TokenContext } from "../context";
 import Input from "../components/Input";
 
 const Login = () => {
-    const router = useRouter();
+    const { token, setToken } = useContext(TokenContext);
+    const router = useRouter("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -18,7 +20,7 @@ const Login = () => {
         } else {
             setDisabled(true);
         }
-    }, [email, password]);
+    }, [token, email, password]);
 
     const handleSubmit = async (e) => {
         setLoading(true);
@@ -29,25 +31,26 @@ const Login = () => {
             password,
         };
 
-        const headers = new Headers();
-        headers.append("Content-Type", "application/json");
-
         var requestOptions = {
             method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body),
-            redirect: "follow",
-            headers: headers,
         };
 
-        const url = "https://altaproject.online/login";
-        fetch(url, requestOptions)
-            .then((response) => {
-                const { data } = response;
-                response.json();
-                if (response.status == 200) {
-                    alert("Login Success");
+        fetch(
+            "https://altaproject.online/login",
+            requestOptions
+        )
+            .then((response) => response.json())
+            .then((result) => {
+                const { code, message, data } = result;
+                if (code === 200) {
+                    const { token } = data;
+                    localStorage.setItem("token", token);
+                    setToken(token);
                     router.push("/");
                 }
+                alert(message);
             })
             .catch((err) => {
                 alert(err.toString());
