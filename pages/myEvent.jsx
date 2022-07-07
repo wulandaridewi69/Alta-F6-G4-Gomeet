@@ -5,15 +5,14 @@ import Delete from '../assets/trash.png'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useContext } from 'react'
-import { TokenContext } from '../utils/context'
-import { useNavigate } from 'react-router-dom'
+import { TokenContext } from '../context'
+import Layout from '../components/Layout'
 
 
-const MyEventList = (remove, update) => {
+const MyEvent = (props) => {
 
-    const navigate = useNavigate()
     const { token } = useContext(TokenContext);
-    const [event, setEvent] = useState()
+    const [event, setEvent] = useState([])
     const [loading, setLoading] = useState(true)
     const [dataDetails, setDataDetails] = useState({})
     const [dataImage, setDataImage] = useState([])
@@ -28,25 +27,15 @@ const MyEventList = (remove, update) => {
 
     const fetchData = () => {
         let myHeaders = new Headers();
+        token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcxODk5ODAsInVzZXJJZCI6Mzh9.De-FhqThd_QzbRxoMhH3rzwY1NMc5to6CraML36DjsI';
         myHeaders.append(`Authorization`, `Bearer ${token}`);
         myHeaders.append(`Content-Type`, `application/json`);
 
-        let raw = JSON.stringify({
-            "name": "Event Laravel And Codeigniter",
-            "address": "Kamp Sayuran RT03 RW 07",
-            "date": "31-10-2022",
-            "price": 15000,
-            "quote": 100,
-            "description": "Topik Tentang Golang",
-            "link": "URL Zoom",
-            "status": "Online",
-            "categorys_id": 0,
-        });
 
         let requestOptions = {
             method: 'GET',
             headers: myHeaders,
-            body: raw,
+            // body: raw,
             redirect: 'follow'
         };
 
@@ -63,11 +52,11 @@ const MyEventList = (remove, update) => {
                     description: "",
                     link: "",
                     status: "",
-                    categorys_id: 0,
+                    id: 0,
                 }
                 result.data.map((item) => {
                     let temp_structure = { ...structure };
-                    temp_structure.name = item.title;
+                    temp_structure.name = item.name;
                     temp_structure.address = item.address;
                     temp_structure.date = item.date;
                     temp_structure.price = item.price;
@@ -75,38 +64,38 @@ const MyEventList = (remove, update) => {
                     temp_structure.description = item.description;
                     temp_structure.link = item.link;
                     temp_structure.status = item.status;
-                    temp_structure.categorys_id = item.categorys_id;
+                    temp_structure.id = item.id;
                     temp.push(temp_structure);
                 })
                 setEvent(temp)
             })
             .catch(error => console.log('error', error))
-            .finally(() => setIsLoading(false));
+            .finally(() => setLoading(false));
     }
 
     const handleDelete = (id) => {
         let myHeaders = new Headers();
         myHeaders.append(`Authorization`, `Bearer ${token}`);
 
+        let raw = "";
+
         let requestOptions = {
             method: 'DELETE',
             headers: myHeaders,
+            body: raw,
             redirect: 'follow'
         };
 
         fetch(`https://altaproject.online/events/${id}`, requestOptions)
-            .then(response => response.json())
-            .then(result => {
-                alert(result.message)
-            })
+            .then(response => response.text())
+            .then(result => console.log(result))
             .catch((error) => {
                 if (error.response.status === 400) {
                     navigate(`/detail/${id}/Not Found`)
                 } else {
                     alert(error)
                 }
-            })
-            .finally(() => setLoading(false));
+            });
     }
 
     if (token !== "0") {
@@ -118,7 +107,7 @@ const MyEventList = (remove, update) => {
             )
         } else {
             return (
-                <layout>
+                <Layout>
                     <div>
                         <h1>My Event List</h1>
                     </div>
@@ -127,32 +116,32 @@ const MyEventList = (remove, update) => {
                             <div className='col-4'>
                                 {event.map((item, index) => (
                                     <div className='col-2 border-4 border-gray-100 border-b-gray-400 rounded-xl'>
-                                        <image src={props.item.image} alt={props.item.name} />
-                                        <h5 classname='font-semibold'>{props.item.title}</h5>
-                                        <p>{props.item.date}</p>
-                                        <div>
+                                        <img src={item.image} alt={item.name} />
+                                        <h5 className='font-semibold'>{item.title}</h5>
+                                        <p>{item.date}</p>
+                                        {/* <div>
                                             <Edit
-                                                onClick={() => setEdit({ id: todo.id, value: todo.text })}
+                                                onClick={() => setEdit({ id:item.id, value: item.title })}
                                                 className='edit-icon'
                                             />
                                         </div>
                                         <div>
                                             <Delete
-                                                onClick={() => removeTodo(todo.id)}
+                                                onClick={() => removeTodo(item.id)}
                                                 className='delete-icon'
                                             />
-                                        </div>
+                                        </div> */}
                                     </div>
                                 ))}
                             </div>
                         </div>
                     </div>
 
-                </layout>
+                </Layout>
             )
         }
     }
 
 }
 
-export default MyEventList;
+export default MyEvent;
