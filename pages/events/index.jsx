@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
-import Cards from '../components/cards'
-import Edit from '../assets/edit.png'
-import Delete from '../assets/trash.png'
+// import Cards from '../../../components/cards'
+// import Edit from '../../assets/edit.png'
+// import Delete from '../../assets/trash.png'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useContext } from 'react'
-import { TokenContext } from '../context'
-import Layout from '../components/Layout'
+import { TokenContext } from '../../context'
+import Layout from '../../components/Layout'
+import Link from 'next/link'
 
 
-const MyEvent = (props) => {
+const MyEvent = () => {
 
     const { token } = useContext(TokenContext);
     const [event, setEvent] = useState([])
@@ -111,6 +112,9 @@ const MyEvent = (props) => {
                     <div>
                         <h1>My Event List</h1>
                     </div>
+                    <Link href={'/events/3'} key={3}>
+                        <a> detail</a>
+                    </Link>
                     <div className='container'>
                         <div className='row'>
                             <div className='col-4'>
