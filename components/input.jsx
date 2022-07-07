@@ -12,6 +12,7 @@ const Input = (props) => {
         variant={props.variant}
         className={props.className}
         onChange={props.onChange}
+        value={props.value}
       />
     </>
   );

@@ -1,9 +1,11 @@
 import Input from "../components/input";
 import Profile from "./profile";
-import Photo from "../assets/mentee.png";
-import Button from "../components/button";
-import { Modal, Box } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import Photo from '../assets/mentee.png'
+import Button from '../components/button'
+import { Modal, Box } from '@mui/material'
+import React, { useContext, useState, useEffect } from 'react'
+import MyEvent from './events'
+import DetailEvent from './events/[id]'
 
 import Layout from "../components/Layout";
 import Category from "../components/Category";
