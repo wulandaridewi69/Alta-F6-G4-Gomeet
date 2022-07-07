@@ -1,36 +1,34 @@
-import React, { Component } from "react";
-import Poster from "../assets/poster.png";
+import React from "react";
 import Image from "next/image";
-// import Date from '../components/date'
+import Link from "next/link";
 
 export const CardEvenList = (props) => {
   return (
     <div>
-      <div className="max-w-sm border-gray-200 p-11">
-        <div
-          className="h-64 flex justify-center cursor-pointer"
-          onClick={() => props.goToDetail()}
-        >
-          <Image src={Poster} className="h-full" alt="" />
+      <div className="max-w-sm border-gray-200 p-12">
+        <div className="h-64 flex justify-center cursor-pointer">
+          <Link href={`/${props.id}`}>
+            <Image
+              src={props.image}
+              className="h-full"
+              alt=""
+              width="150%"
+              height="50%"
+            />
+          </Link>
         </div>
         <div className="flex justify-center">
           <div className="p-2 pb-0">
-            <div className="font-bold">{props.title} Event Web Progamming</div>
-            <div className="flex">
-              <div className="text-slate-500 mb-2 mr-3">
-                {props.Date} 21 MEI 2020
-              </div>
-              <div className="text-slate-500 mb-2">{props.location} Jogja</div>
+            <div className="font-bold text-white/95">{props.title}</div>
+            <div className="text-white/95">{props.Date}</div>
+            <div className="text-white/95">{props.location}</div>
+            <div className="font-bold flex justify-between text-white/95">
+              Rp {props.price}
             </div>
-            <div className="font-bold flex justify-between">
-              Price {`$ ${parseInt(props.payment).toLocaleString()}`} 100000
+            <div className="font-bold flex justify-between text-white/95">
+              {props.quota}
             </div>
-            <div className="font-bold flex justify-between">
-              Quota {props.quota} 100
-            </div>
-            <div className="text-slate-500 mb-2">
-              Offline {props.statusEvent}{" "}
-            </div>
+            <div className="text-white/95 mb-2">{props.statusEvent}</div>
           </div>
         </div>
       </div>
