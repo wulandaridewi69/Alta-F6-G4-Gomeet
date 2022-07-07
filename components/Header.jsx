@@ -8,7 +8,7 @@ export default function Header() {
   const [token, setToken] = useState(true);
 
   return (
-    <nav className="sticky top-0 w-full px-2 py-2.5 bg-black flex justify-between drop-shadow-2xl">
+    <nav className="sticky top-0 w-full px-2 py-2.5 bg-black flex justify-between drop-shadow-2xl z-10">
       <div className="flex items-center font-bold text-2xl text-white">
         <Link id="to-homepage" href="/">
           GOMEET

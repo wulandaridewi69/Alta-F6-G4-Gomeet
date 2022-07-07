@@ -1,11 +1,10 @@
 import React from "react";
 
-function CustomButton({ id, label, loading, onClick }) {
+function CustomButton({ id, label, className, loading, onClick }) {
     return (
         <button
             id={id}
-            className={`bg-[#E49318] text-white font-bold py-2 px-4 rounded-full ${loading && "bg-orange-200 cursor-not-allowed"
-                }`}
+            className={className}
             onClick={onClick}
             disabled={loading}
         >
