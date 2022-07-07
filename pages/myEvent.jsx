@@ -109,7 +109,12 @@ const MyEvent = (props) => {
             return (
                 <Layout>
                     <div>
-                        <h1>My Event List</h1>
+                      <Edit
+                        onClick={() =>
+                          setEdit({ id: todo.id, value: todo.text })
+                        }
+                        className="edit-icon"
+                      />
                     </div>
                     <div className='container'>
                         <div className='row'>
@@ -141,7 +146,7 @@ const MyEvent = (props) => {
             )
         }
     }
-
-}
+  }
+};
 
 export default MyEvent;
