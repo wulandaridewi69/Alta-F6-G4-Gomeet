@@ -4,7 +4,6 @@ import Link from "next/link";
 
 import { TokenContext } from "../utils/context";
 import CustomButton from "../components/CustomButton";
-import { TokenContext } from "../context";
 import Input from "../components/Input";
 
 const Login = () => {
