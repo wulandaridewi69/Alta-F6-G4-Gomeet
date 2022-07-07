@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useContext } from 'react'
-import { TokenContext } from '../../context'
+import { TokenContext } from '../../utils/context'
 import Layout from '../../components/Layout'
 import Link from 'next/link'
 
@@ -21,14 +21,13 @@ const MyEvent = () => {
     const [date, setDate] = useState("")
     const [time, setTime] = useState("")
 
-
     useEffect(() => {
         fetchData()
     }, [])
 
     const fetchData = () => {
         let myHeaders = new Headers();
-        token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcxODk5ODAsInVzZXJJZCI6Mzh9.De-FhqThd_QzbRxoMhH3rzwY1NMc5to6CraML36DjsI';
+        token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTU0OTgsInVzZXJJZCI6Njh9._NRD8gpEulT5V8l3m9PlN6QWy12RcnFEFKB1BZu7PzE';
         myHeaders.append(`Authorization`, `Bearer ${token}`);
         myHeaders.append(`Content-Type`, `application/json`);
 
@@ -110,7 +109,12 @@ const MyEvent = () => {
             return (
                 <Layout>
                     <div>
-                        <h1>My Event List</h1>
+                        {/* <Edit
+                            onClick={() =>
+                                setEdit({ id: todo.id, value: todo.text })
+                            }
+                            className="edit-icon"
+                        /> */}
                     </div>
                     <Link href={'/events/3'} key={3}>
                         <a> detail</a>
@@ -145,7 +149,6 @@ const MyEvent = () => {
             )
         }
     }
-
-}
+};
 
 export default MyEvent;

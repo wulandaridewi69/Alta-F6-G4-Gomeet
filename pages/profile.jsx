@@ -4,7 +4,7 @@ import Photo from "../assets/mentee.png";
 import Button from "../components/button";
 import { Modal, Box } from "@mui/material";
 import { useContext, useState, useEffect } from "react";
-import { TokenContext } from "../context";
+import { TokenContext } from "../utils/context";
 import Layout from "../components/Layout";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,6 +14,7 @@ const Profile = () => {
     const { token, setToken } = useContext(TokenContext);
 
     const [email, setEmail] = useState("");
+    const [image, setImage] = useState("");
     const [username, setUsername] = useState("");
     const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
@@ -35,7 +36,7 @@ const Profile = () => {
 
     const fetchProfile = () => {
         let myHeaders = new Headers();
-        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTI2NzIsInVzZXJJZCI6Mzh9.Pn9ALWf6195DbQ_tpiLQOuqKvcZl6K4GhyaDRNudYak";
+        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTYyNzAsInVzZXJJZCI6Njh9.cd3weyV50Ogj3FkqhoAV-UgiYjZa4ywEkrkKOFmtXyY";
         myHeaders.append(`Authorization`, `Bearer ${token}`);
 
         let requestOptions = {
@@ -139,16 +140,16 @@ const Profile = () => {
             formData.append("address", address);
 
             let myHeaders = new Headers();
+            token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTY3MjcsInVzZXJJZCI6Njh9.DMPOMx08cpgYLYSs52FGX3AAMqWy2AbKdBtYsikQwX8";
             myHeaders.append(`Authorization`, `Bearer ${token}`);
             myHeaders.append("Content-Type", "application/json");
 
             let raw = JSON.stringify({
-                image: "mabar.jpg",
-                username: "Winda3",
-                email: "winda@gmail.com",
-                password: "Liberty1@",
-                phone: "812345666",
-                address: "Malang",
+                image: image,
+                username: username,
+                email: email,
+                phone: phone,
+                address: address,
             });
 
             let requestOptions = {
@@ -174,7 +175,7 @@ const Profile = () => {
 
     const handleDelete = () => {
 
-        const  token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTMyNzksInVzZXJJZCI6Njd9.cHzOSYdjhnEtK5BANMEcgV8AHWK9NDme3FYrRlDe6Yk`;
+        const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTMyNzksInVzZXJJZCI6Njd9.cHzOSYdjhnEtK5BANMEcgV8AHWK9NDme3FYrRlDe6Yk`;
         let myHeaders = new Headers();
         myHeaders.append(`Authorization`, `Bearer ${token}`);
 
@@ -187,8 +188,8 @@ const Profile = () => {
         fetch("https://altaproject.online/users", requestOptions)
             .then((response) => response.json())
             .then((result) => {
-                    alert(result.message);
-                })
+                alert(result.message);
+            })
             .catch((error) => {
                 if (error.response) {
                     navigate(`/login`);
@@ -200,11 +201,11 @@ const Profile = () => {
     };
 
     const handleUpdate = () => {
-       let myHeaders = new Headers();
+        let myHeaders = new Headers();
         myHeaders.append(`Authorization`, `Bearer ${token}`);
         myHeaders.append(`Content-Type`, `application/json`);
 
-       let raw = JSON.stringify({
+        let raw = JSON.stringify({
             "image": "mabar.jpg",
             "username": "Winda3",
             "email": "winda@gmail.com",
@@ -213,7 +214,7 @@ const Profile = () => {
             "address": "Malang"
         });
 
-       let requestOptions = {
+        let requestOptions = {
             method: 'PUT',
             headers: myHeaders,
             body: raw,
@@ -225,6 +226,33 @@ const Profile = () => {
             .then(result => {
                 alert(result.message);
             })
+            .catch(error => console.log('error', error));
+    }
+
+    const handleUpload = (e) => {
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTMyNzksInVzZXJJZCI6Njd9.cHzOSYdjhnEtK5BANMEcgV8AHWK9NDme3FYrRlDe6Yk");
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "image": "mabar.jpg",
+            "username": "Winda",
+            "email": "winda@gmail.com",
+            "password": "Liberty1@",
+            "phone": "812345666",
+            "address": "Malang"
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("https://altaproject.online/users", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
             .catch(error => console.log('error', error));
     }
 
@@ -269,7 +297,7 @@ const Profile = () => {
                             <div className="container">
                                 <div className="row">
                                     <div className="col-6 text-center">
-                                        <Image className="rounded-full" src={Photo}><span></span></Image>
+                                        <Image className="rounded-full" src={Photo}></Image>
                                         <div className="flex text-center pl-44 pt-8 pb-4 gap-5">
                                             <Link href='/events'>
                                                 <Button
