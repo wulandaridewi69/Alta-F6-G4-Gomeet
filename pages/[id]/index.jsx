@@ -201,12 +201,12 @@ const DetailEvent = (props) => {
 
         <div className="flex justify-center">
           <div className="mr-24">
-            <Image width={300} height={400} src={event.image} />
+            <Image width={500} height={600} src={event.image} />
           </div>
 
           <div className=" text-white space-y-3 ml-24">
             <div>
-              <h4 className="font-bold text-lg">{event.name}</h4>
+              <h4 className="font-bold text-3xl">{event.name}</h4>
             </div>
             <div>
               <h5 className="font-bold text-lg">Description</h5>
@@ -275,14 +275,13 @@ const DetailEvent = (props) => {
           <hr className='h-2 bg-white mb-5' />
         </div>
 
-        <h1 className="text-center font-bold text-white mb-5">Participant</h1>
-
+        <h1 className="text-4xl font-bold text-white py-20 flex justify-center">Participant</h1>
         <div>
           <div className="flex flex-row justify-around text-white mb-10">
             {participants.map((participant, index) => (
               <div key={index}>
                 <Image className="rounded-full" width={100} height={100} src={participant.User.image} />
-                <p>{participant.User.username}</p>
+                <p className="pt-5">{participant.User.username}</p>
               </div>
             ))}
           </div>

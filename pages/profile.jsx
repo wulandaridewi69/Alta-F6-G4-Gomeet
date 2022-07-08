@@ -294,27 +294,21 @@ const Profile = () => {
                                 <div className="row">
                                     <div className="col-6 text-center">
                                         <Image className="rounded-full" src={Photo}></Image>
-                                        <div className="flex text-center pl-44 pt-8 pb-4 gap-5">
+                                        <div className="flex text-center pl-40 pt-8 pb-4 gap-2">
                                             <Link href='/events'>
                                                 <Button
-                                                    className="bg-orange-600 hover:bg-orange-400 font-bold py-2 px-4 rounded text-white pb-2 pl-4"
+                                                    className="bg-orange-600 hover:bg-orange-400 font-bold py-2 px-5 rounded text-white pb-2 pl-4"
                                                     label="My Event"
                                                 // onClick={() => handleMyEvent()}
                                                 />
                                             </Link>
-                                            <Link href='/history'>
-                                                <Button
-                                                    className="bg-orange-600 hover:bg-orange-400 font-bold py-2 px-4 rounded text-white pb-2 pl-4"
-                                                    label="Hystory"
-                                                // onClick={() => handleHistory()}
-                                                />
-                                            </Link>
-                                        </div>
-                                        <Button
-                                            className="bg-rose-700 hover:bg-rose-400 font-bold py-2 px-5 rounded text-white"
+                                            <Button
+                                            className="bg-rose-700 hover:bg-rose-400 font-bold py-2 px-4 rounded text-white"
                                             label="Delete Account"
                                             onClick={() => handleDelete()}
                                         />
+                                        </div>
+                                        
                                     </div>
 
                                     <div className="col-6 ">
