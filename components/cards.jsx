@@ -8,7 +8,7 @@ export const CardEvenList = (props) => {
       <div className="max-w-sm border-gray-200 p-12">
         <div className="h-64 flex justify-center cursor-pointer">
           <Link href={`/${props.id}`}>
-            <Image
+            <Image 
               src={props.image}
               className="h-full"
               alt=""

@@ -1,6 +1,6 @@
-import Button from "../../../components/button";
-import { TokenContext } from "../../../utils/context";
-import Layout from "../../../components/Layout";
+import Button from "../../components/button";
+import { TokenContext } from "../../utils/context";
+import Layout from "../../components/Layout";
 import React, { useState, useContext, useEffect } from "react";
 import { useRef } from "react";
 import { useRouter } from "next/router";

@@ -4,8 +4,8 @@ import Photo from '../assets/mentee.png'
 import Button from '../components/button'
 import { Modal, Box } from '@mui/material'
 import React, { useContext, useState, useEffect } from 'react'
-import MyEvent from './events'
-import DetailEvent from './events/[id]'
+import MyEvent from './myEvent'
+import DetailEvent from './[id]'
 
 import Layout from "../components/Layout";
 import Category from "../components/Category";

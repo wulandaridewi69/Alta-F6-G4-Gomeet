@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-// import Cards from '../../../components/cards'
-// import Edit from '../../assets/edit.png'
-// import Delete from '../../assets/trash.png'
+import { MdDelete } from 'react-icons/md';
+import { TiEdit } from 'react-icons/ti';
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useContext } from 'react'
-import { TokenContext } from '../../utils/context'
-import Layout from '../../components/Layout'
+import { TokenContext } from '../utils/context'
+import Layout from '../components/Layout'
 import Link from 'next/link'
+import Image from 'next/image';
 
 
 const MyEvent = () => {
@@ -22,19 +22,17 @@ const MyEvent = () => {
     const [time, setTime] = useState("")
 
     useEffect(() => {
-        fetchData()
+        fetchDataEvent()
     }, [])
 
-    const fetchData = () => {
+    const fetchDataEvent = () => {
         let myHeaders = new Headers();
         myHeaders.append(`Authorization`, `Bearer ${token}`);
         myHeaders.append(`Content-Type`, `application/json`);
 
-
         let requestOptions = {
             method: 'GET',
             headers: myHeaders,
-            // body: raw,
             redirect: 'follow'
         };
 
@@ -43,6 +41,7 @@ const MyEvent = () => {
             .then(result => {
                 let temp = [];
                 const structure = {
+                    image: "",
                     name: "",
                     address: "",
                     date: "",
@@ -55,6 +54,7 @@ const MyEvent = () => {
                 }
                 result.data.map((item) => {
                     let temp_structure = { ...structure };
+                    temp_structure.image = item.image;
                     temp_structure.name = item.name;
                     temp_structure.address = item.address;
                     temp_structure.date = item.date;
@@ -86,16 +86,21 @@ const MyEvent = () => {
         };
 
         fetch(`https://altaproject.online/events/${id}`, requestOptions)
-            .then(response => response.text())
-            .then(result => console.log(result))
+            .then(response => response.json())
+            .then(result => {
+                alert("Successfully deleted event");
+                fetchDataEvent()
+            })
             .catch((error) => {
-                if (error.response.status === 400) {
-                    navigate(`/detail/${id}/Not Found`)
-                } else {
-                    alert(error)
-                }
+                alert("Failed to delete event")
             });
     }
+
+    const handleEdit = (e) => {
+        if (token === "0") {
+            navigate("/updateEvent");
+        }
+    };
 
     if (token !== "0") {
         if (loading) {
@@ -108,36 +113,32 @@ const MyEvent = () => {
             return (
                 <Layout>
                     <div>
-                        {/* <Edit
-                            onClick={() =>
-                                setEdit({ id: todo.id, value: todo.text })
-                            }
-                            className="edit-icon"
-                        /> */}
+                        <h1>My Event List</h1>
                     </div>
-                    <Link href={'/events/3'} key={3}>
-                        <a> detail</a>
-                    </Link>
                     <div className='container'>
                         <div className='row'>
                             <div className='col-4'>
                                 {event.map((item, index) => (
-                                    <div className='col-2 border-4 border-gray-100 border-b-gray-400 rounded-xl'>
-                                        <img src={item.image} alt={item.name} />
-                                        <h5 className='font-semibold'>{item.title}</h5>
-                                        <p>{item.date}</p>
-                                        {/* <div>
-                                            <Edit
-                                                onClick={() => setEdit({ id:item.id, value: item.title })}
-                                                className='edit-icon'
-                                            />
+                                    <div className='col-2  rounded-xl w-full h-full'>
+                                        <Image src={item.image} alt={item.name} width={300} height={400} />
+                                        <div  className='flex gap-5'>
+                                            <div className='bg-orange-600 text-white'>
+                                                <Link href={`/updateEvent`}>
+                                                    <TiEdit
+                                                        className='edit-icon'
+                                                        onClick={() => handleEdit()}
+                                                    />
+                                                </Link>
+                                            </div>
+                                            <div className='bg-rose-700 text-white'>
+                                                <MdDelete
+                                                    className='delete-icon'
+                                                    onClick={() => handleDelete()}
+                                                />
+                                            </div>
                                         </div>
-                                        <div>
-                                            <Delete
-                                                onClick={() => removeTodo(item.id)}
-                                                className='delete-icon'
-                                            />
-                                        </div> */}
+                                        <h5 className='font-semibold text-white'>{item.name}</h5>
+                                        <p className='text-white'>{item.date}</p>
                                     </div>
                                 ))}
                             </div>
