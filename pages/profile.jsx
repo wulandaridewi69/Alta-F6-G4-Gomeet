@@ -36,7 +36,6 @@ const Profile = () => {
 
     const fetchProfile = () => {
         let myHeaders = new Headers();
-        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTYyNzAsInVzZXJJZCI6Njh9.cd3weyV50Ogj3FkqhoAV-UgiYjZa4ywEkrkKOFmtXyY";
         myHeaders.append(`Authorization`, `Bearer ${token}`);
 
         let requestOptions = {
@@ -140,7 +139,6 @@ const Profile = () => {
             formData.append("address", address);
 
             let myHeaders = new Headers();
-            token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTY3MjcsInVzZXJJZCI6Njh9.DMPOMx08cpgYLYSs52FGX3AAMqWy2AbKdBtYsikQwX8";
             myHeaders.append(`Authorization`, `Bearer ${token}`);
             myHeaders.append("Content-Type", "application/json");
 
@@ -174,8 +172,6 @@ const Profile = () => {
     };
 
     const handleDelete = () => {
-
-        const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTMyNzksInVzZXJJZCI6Njd9.cHzOSYdjhnEtK5BANMEcgV8AHWK9NDme3FYrRlDe6Yk`;
         let myHeaders = new Headers();
         myHeaders.append(`Authorization`, `Bearer ${token}`);
 
@@ -235,12 +231,12 @@ const Profile = () => {
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-            "image": "mabar.jpg",
-            "username": "Winda",
-            "email": "winda@gmail.com",
-            "password": "Liberty1@",
-            "phone": "812345666",
-            "address": "Malang"
+            "image": image,
+            "username": username,
+            "email": email,
+            "password": password,
+            "phone": phone,
+            "address": address,
         });
 
         var requestOptions = {
@@ -251,7 +247,7 @@ const Profile = () => {
         };
 
         fetch("https://altaproject.online/users", requestOptions)
-            .then(response => response.text())
+            .then(response => response.json())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
     }
