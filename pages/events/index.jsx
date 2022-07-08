@@ -27,7 +27,6 @@ const MyEvent = () => {
 
     const fetchData = () => {
         let myHeaders = new Headers();
-        token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTU0OTgsInVzZXJJZCI6Njh9._NRD8gpEulT5V8l3m9PlN6QWy12RcnFEFKB1BZu7PzE';
         myHeaders.append(`Authorization`, `Bearer ${token}`);
         myHeaders.append(`Content-Type`, `application/json`);
 
