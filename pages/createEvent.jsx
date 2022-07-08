@@ -49,47 +49,40 @@ const createEvent = () => {
         }
     }, [token, name, date, address, price, quota, description, category, status, link]);
 
-
-    const headers = new Headers();
-    headers.append("Content-Type", "application/json");
-
-    var requestOptions = {
-        method: "POST",
-        body: JSON.stringify(body),
-        redirect: "follow",
-        headers: headers,
-    };
-
-    fetch("https://altaproject.online/events", requestOptions)
-        .then((response) => response.json())
-        .then((result) => {
-            const { message, data, token } = result;
-            if (message === "success") {
-                localStorage.setItem("token", token);
-                setToken(token);
-                router.push("/");
-            }
-            alert(message);
-        })
-        .catch((err) => {
-            alert(err.toString());
-        })
-        .finally(() => setLoading(false));
-};
-
-const handleSubmit = async (e) => {
-    setLoading(true);
-    e.preventDefault();
-    const body = {
-        name,
-        date,
-        address,
-        price,
-        quota,
-        link,
-        description,
-        category,
-        status,
+    const handleSubmit = async (e) => {
+        setLoading(true);
+        e.preventDefault();
+        const body = {
+            name,
+            date,
+            address,
+            price,
+            quota,
+            link,
+            description,
+            category,
+            status,
+        };
+        var requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+        };
+        fetch("https://altaproject.online/events", requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+                const { message, data, token } = result;
+                if (message === "success") {
+                    localStorage.setItem("token", token);
+                    setToken(token);
+                    router.push("/");
+                }
+                alert(message);
+            })
+            .catch((err) => {
+                alert(err.toString());
+            })
+            .finally(() => setLoading(false));
     };
 
     const handleChange = (event) => {
