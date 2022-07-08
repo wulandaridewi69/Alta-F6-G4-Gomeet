@@ -6,8 +6,14 @@ import { useRef } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from 'next/dynamic';
 
 const DetailEvent = (props) => {
+  const Maps = dynamic(
+    () => import('../../../components/Maps'),
+    { ssr: false }
+  )
+
   const { token } = useContext(TokenContext);
   const router = useRouter();
 
@@ -19,6 +25,8 @@ const DetailEvent = (props) => {
   const [eventImage, setEventImage] = useState("");
   const [participants, setParticipants] = useState([]);
   const [comment, setComment] = useState("");
+
+  const [location, setLocation] = useState({ lng: - 6.988567492671183, lat: 110.42104354029307 });
 
   useEffect(() => {
     fetchDetailEvent();
@@ -187,95 +195,107 @@ const DetailEvent = (props) => {
   } else {
     return (
       <Layout>
-        <div>
+        <div className="text-4xl font-bold text-white my-20 flex justify-center">
           <h1>Detail Event</h1>
         </div>
-        <div className="container">
-          <div className="row">
-            <div className="col-6">
-              <div >
-                <Image width={300} height={400} src={event.image} />
-                <map />
-              </div>
+
+        <div className="flex justify-center">
+          <div className="mr-24">
+            <Image width={300} height={400} src={event.image} />
+          </div>
+
+          <div className=" text-white space-y-3 ml-24">
+            <div>
+              <h4 className="font-bold text-lg">{event.name}</h4>
             </div>
-            <div className="col-6 text-white">
-              <div>
-                <h4 className="bold">{event.name}</h4>
-              </div>
-              <div>
-                <h5 className="bold">Description</h5>
-                <p>{event.description}</p>
-              </div>
-              <div>
-                <h5 className="bold">Status</h5>
-                <p>{event.status}</p>
-              </div>
-              <div>
-                <h5 className="bold">Category</h5>
-                <p>{event.Categorys.id}</p>
-              </div>
-              <div>
-                <h5 className="bold">Date</h5>
-                <p>{event.date}</p>
-              </div>
-              <div>
-                <h5 className="bold">Price</h5>
-                <p>{event.price}</p>
-              </div>
-              <div>
-                <h5 className="bold">Quote</h5>
-                <p>{event.quote}</p>
-              </div>
-              <div>
-                <h5 className="bold">Address</h5>
-                <p>{event.address}</p>
-              </div>
-              <div>
-                <h5 className="bold">Link</h5>
-                <p>{event.link}</p>
-              </div>
+            <div>
+              <h5 className="font-bold text-lg">Description</h5>
+              <p>{event.description}</p>
+            </div>
+            <div>
+              <h5 className="font-bold text-lg">Status</h5>
+              <p>{event.status}</p>
+            </div>
+            <div>
+              <h5 className="font-bold text-lg">Category</h5>
+              <p>{event.Categorys.id}</p>
+            </div>
+            <div>
+              <h5 className="font-bold text-lg">Date</h5>
+              <p>{event.date}</p>
+            </div>
+            <div>
+              <h5 className="font-bold text-lg">Price</h5>
+              <p>{event.price}</p>
+            </div>
+            <div>
+              <h5 className="font-bold text-lg">Quote</h5>
+              <p>{event.quote}</p>
+            </div>
+            <div>
+              <h5 className="font-bold text-lg">Address</h5>
+              <p>{event.address}</p>
+            </div>
+            <div>
+              <h5 className="font-bold text-lg">Link</h5>
+              <p>{event.link}</p>
             </div>
           </div>
         </div>
-        <div className="pb-2 pt-6 text-end">
-          <Link href='/receipt'>
-            <Button
-              className=" bg-orange-600 hover:bg-orange-400 font-bold py-2 px-5 rounded text-white"
-              label="Join"
-              onClick={() => handleJoin()}
+
+        <div className="flex justify-around my-16">
+          <div className="text-white">
+            <Maps
+              center={location}
+              location={location}
+              draggable={true}
+              title="My Map"
+              onDragMarker={(e) => {
+                console.log("e", e);
+                let loc = { lat: e.lng, lng: e.lat };
+                setLocation(loc);
+              }}
             />
+            {"lng: " + location.lng}
+            <br />
+            {"lat: " + location.lat}
+          </div>
+          <div className="pb-2 pt-6 flex flex-col justify-end">
+            <Link href='/receipt'>
+              <Button
+                className=" bg-orange-600 w-[300px] hover:bg-orange-400 font-bold py-2 px-5 rounded text-white"
+                label="Join"
+                onClick={() => handleJoin()}
+              />
             </Link>
           </div>
-
-        <hr />
+        </div>
 
         <div>
-          <h1 className="text-center bold text-white">Participant</h1>
+          <hr className='h-2 bg-white mb-5' />
         </div>
-        <div className="container">
-          <div className="row>">
-            <div className="col-3">
-              {participants.map((participant, index) => (
-                <div key={index}>
-                  <Image className="rounded-full" width={100} height={100} src={participant.User.image} />
-                  <p>{participant.User.username}</p>
-                </div>
-              ))}
-            </div>
+
+        <h1 className="text-center font-bold text-white mb-5">Participant</h1>
+
+        <div>
+          <div className="flex flex-row justify-around text-white mb-10">
+            {participants.map((participant, index) => (
+              <div key={index}>
+                <Image className="rounded-full" width={100} height={100} src={participant.User.image} />
+                <p>{participant.User.username}</p>
+              </div>
+            ))}
           </div>
         </div>
 
-        <hr />
+        <div>
+          <hr className='h-2 bg-white mb-5' />
+        </div>
 
         <div>
-          <h1 className="text-center bold text-white">Comment</h1>
+          <h1 className="text-center font-bold text-white mb-5">Comment</h1>
         </div>
-        <div>
-          <box>
-            <p>hai</p>
-          </box>
-        </div>
-        <div className="flex">
+        <div className="flex flex-col justify-center items-center">
           <input />
           <div className="pb-2 pt-6 grid">
             <Button
