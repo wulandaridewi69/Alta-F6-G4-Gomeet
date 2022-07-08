@@ -1,11 +1,11 @@
 import Input from "../components/input";
 import Profile from "./profile";
-import Photo from '../assets/mentee.png'
-import Button from '../components/button'
-import { Modal, Box } from '@mui/material'
-import React, { useContext, useState, useEffect } from 'react'
-import MyEvent from './events'
-import DetailEvent from './events/[id]'
+import Photo from "../assets/mentee.png";
+import Button from "../components/button";
+import { Modal, Box } from "@mui/material";
+import React, { useContext, useState, useEffect } from "react";
+import MyEvent from "./events";
+import DetailEvent from "./events/[id]";
 
 import Layout from "../components/Layout";
 import Category from "../components/Category";
@@ -44,19 +44,21 @@ export default function Homepage() {
           <Layout>
             <Category />
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2 mt-5 justify-center">
-              {data.map((item) => (
-                <CardEvenList
-                  key={item.id}
-                  id={item.id}
-                  image={item.image}
-                  title={item.name}
-                  Date={item.date}
-                  location={item.address}
-                  price={item.price}
-                  quota={item.quota}
-                  statusEvent={item.status}
-                />
-              ))}
+              {data
+                .map((item) => (
+                  <CardEvenList
+                    key={item.id}
+                    id={item.id}
+                    image={item.image}
+                    title={item.name}
+                    Date={item.date}
+                    location={item.address}
+                    price={item.price}
+                    quota={item.quota}
+                    statusEvent={item.status}
+                  />
+                ))
+                .reverse()}
             </div>
           </Layout>
         </div>
