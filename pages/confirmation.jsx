@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
 import CustomeButton from "../components/CustomButton";
+import { useRouter } from "next/router";
 
 function Confirmation() {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push("/");
+  }
+  
+
+
   return (
     <div>
       <Layout>
@@ -51,7 +60,7 @@ function Confirmation() {
               </div>
             </div>
           </div>
-          <div className="flex justify-center mt-10">
+          <div className="flex justify-center mt-10" onClick={handleClick}>
             <CustomeButton
               label="Pay"
               className={`bg-[#E49318] text-white font-bold py-1 px-14 rounded-lg ${
