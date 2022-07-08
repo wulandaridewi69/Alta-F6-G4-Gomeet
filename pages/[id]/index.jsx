@@ -10,7 +10,7 @@ import dynamic from 'next/dynamic';
 
 const DetailEvent = (props) => {
   const Maps = dynamic(
-    () => import('../../../components/Maps'),
+    () => import('../../components/Maps'),
     { ssr: false }
   )
 
@@ -261,7 +261,7 @@ const DetailEvent = (props) => {
             {"lat: " + location.lat}
           </div>
           <div className="pb-2 pt-6 flex flex-col justify-end">
-            <Link href='/receipt'>
+            <Link href='/confirmation'>
               <Button
                 className=" bg-orange-600 w-[300px] hover:bg-orange-400 font-bold py-2 px-5 rounded text-white"
                 label="Join"

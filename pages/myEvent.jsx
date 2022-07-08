@@ -119,7 +119,7 @@ const MyEvent = () => {
                         <div className='row'>
                             <div className='col-4'>
                                 {event.map((item, index) => (
-                                    <div className='col-2  rounded-xl w-full h-full'>
+                                    <div className='col-2  rounded-xl w-full h-full pb-20'>
                                         <Image src={item.image} alt={item.name} width={300} height={400} />
                                         <div  className='flex gap-5'>
                                             <div className='bg-orange-600 text-white'>
