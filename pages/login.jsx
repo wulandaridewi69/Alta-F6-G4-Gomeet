@@ -56,11 +56,11 @@ const Login = () => {
 
   return (
     <div className="w-full h-screen overflow-auto flex flex-col justify-center items-center bg-gradient-to-b from-slate-900 to-sky-600">
-      <div className="bg-white/30 w-1/2 h-full flex flex-col items-center justify-evenly">
-        <h1 className="font-bold lg:text-5xl md:text-4xl text-7xl text-white">
+      <div className="bg-white/30 lg:w-1/2 md:w-[60%] w-[95%] h-full flex flex-col items-center justify-evenly">
+        <h1 className="font-bold lg:text-5xl md:text-4xl text-3xl text-white">
           GOMEET
         </h1>
-        <div className="text-white text-4xl font-bold">Login</div>
+        <div className="text-white lg:text-4xl md:text-3xl text-2xl font-bold">Login</div>
         <form
           onSubmit={(e) => handleSubmit(e)}
           className="space-y-4 text-white flex flex-col w-1/2"
@@ -79,9 +79,8 @@ const Login = () => {
           />
           <div className="flex justify-center">
             <CustomButton
-              className={`bg-[#E49318] text-white font-bold py-2 w-24 rounded-lg ${
-                loading && "bg-orange-200 cursor-not-allowed"
-              }`}
+              className={`bg-[#E49318] text-white font-bold py-2 w-24 rounded-lg ${loading && "bg-orange-200 cursor-not-allowed"
+                }`}
               id="btn-login"
               label="Login"
               loading={loading || disabled}
