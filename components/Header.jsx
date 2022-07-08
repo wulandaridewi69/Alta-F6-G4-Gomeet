@@ -21,6 +21,10 @@ export default function Header() {
     alert("You have been logged out");
   };
 
+  const handleCreate = () => {
+    router.push("/createEvent");
+  };
+
   const handleModal = () => {
     setShowModal(!showModal);
   };
@@ -45,17 +49,21 @@ export default function Header() {
         )}
         {token !== "0" && (
           <div className="flex flex-row items-center justify-center ">
-            <div className="text-white mr-3">
-              <FaPlus />
-            </div>
-            <div className="mr-3" onClick={handleModal}>
-              <Image
-                src={mentee}
-                alt="Picture of the author"
-                width={30}
-                height={30}
-              />
-            </div>
+            <button type="button">
+              <div className="text-white mr-3" onClick={handleCreate}>
+                <FaPlus />
+              </div>
+            </button>
+            <button type="button">
+              <div className="mr-3" onClick={handleModal}>
+                <Image
+                  src={mentee}
+                  alt="Picture of the author"
+                  width={30}
+                  height={30}
+                />
+              </div>
+            </button>
           </div>
         )}
       </nav>
@@ -69,20 +77,18 @@ export default function Header() {
             aria-labelledby="dropdownDividerButton"
           >
             <li>
-              <a
-                href="#"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                Profile
-              </a>
+              <Link href="/historyEvent">
+                <a className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                  History Event
+                </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                History
-              </a>
+              <Link href="/updateEvent">
+                <a className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                  Edit Event
+                </a>
+              </Link>
             </li>
           </ul>
           <div className="py-1">

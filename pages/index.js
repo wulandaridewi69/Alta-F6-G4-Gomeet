@@ -44,19 +44,21 @@ export default function Homepage() {
           <Layout>
             <Category />
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2 mt-5 justify-center">
-              {data.map((item) => (
-                <CardEvenList
-                  key={item.id}
-                  id={item.id}
-                  image={item.image}
-                  title={item.name}
-                  Date={item.date}
-                  location={item.address}
-                  price={item.price}
-                  quota={item.quota}
-                  statusEvent={item.status}
-                />
-              ))}
+              {data
+                .map((item) => (
+                  <CardEvenList
+                    key={item.id}
+                    id={item.id}
+                    image={item.image}
+                    title={item.name}
+                    Date={item.date}
+                    location={item.address}
+                    price={item.price}
+                    quota={item.quota}
+                    statusEvent={item.status}
+                  />
+                ))
+                .reverse()}
             </div>
           </Layout>
         </div>
